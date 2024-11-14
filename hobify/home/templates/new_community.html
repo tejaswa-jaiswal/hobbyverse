@@ -1,0 +1,113 @@
+{% extends "base.html" %}
+
+{% block body %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Community</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100vh;
+            background-color: #f5f5f5;
+            margin: 0;
+        }
+
+        .header, .footer {
+            background-color: grey;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        .form-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex: 1; /* Take up available space */
+        }
+
+        .form {
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 300px; /* Adjust width as needed */
+        }
+
+        .form h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .form label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        .form input[type="text"],
+        .form input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-bottom: 15px;
+        }
+
+        .form button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .form button:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <div class="header">
+        <h1>Community Management</h1>
+    </div>
+
+    <!-- Form Container -->
+    <div class="form-container">
+        <div class="form">
+            <h2>Add Community</h2>
+            <form action="{% url 'add_community' %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                
+                <!-- Community Name Field -->
+                <label for="name">Community Name:</label>
+                <input type="text" id="name" name="name" required>
+
+                <!-- Image Upload Field -->
+                <label for="image">Community Image:</label>
+                <input type="file" id="image" name="image" accept="image/*" required>
+
+                <!-- Submit Button -->
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    
+
+</body>
+</html>
+{% endblock %}

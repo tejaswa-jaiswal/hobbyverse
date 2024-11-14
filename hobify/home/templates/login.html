@@ -1,0 +1,140 @@
+{% extends "base.html" %}
+
+{% block style %}
+.navbar {
+    background-color: #1c1c1c;
+}
+
+/* Centering the login form without affecting navbar */
+.login-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 90vh; /* Adjusted to leave space for navbar */
+}
+
+.login-container {
+    background: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 300px;
+    position: relative;
+}
+
+.login-container h2 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.input-group {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.input-group input[type="email"], 
+.input-group input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    padding-right: 40px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    outline: none;
+}
+
+/* Eye icon */
+.input-group .toggle-password {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 18px;
+    color: #999;
+}
+
+/* Animated Bird */
+.bird {
+    position: absolute;
+    top: -15px;
+    right: 40px;
+    font-size: 25px;
+    transition: transform 0.4s ease, top 0.3s;
+    transform-origin: center;
+}
+
+.bird.look {
+    transform: rotate(-20deg) scale(1.2);
+    top: -5px;
+    right: 10px;
+}
+
+.bird.fly {
+    animation: flyIn 0.6s ease forwards;
+}
+
+@keyframes flyIn {
+    0% { 
+        opacity: 0; 
+        transform: translateY(-20px) scale(0.8); 
+    }
+    100% { 
+        opacity: 1; 
+        transform: translateY(0) scale(1); 
+    }
+}
+
+.login-btn {
+    width: 100%;
+    padding: 10px;
+    background-color: #28a745;
+    border: none;
+    color: #fff;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.login-btn:hover {
+    background-color: #218838;
+}
+{% endblock  %}
+{% block body %}
+<br>
+<form method="POST" , action="{% url 'login_user' %}">
+    {% csrf_token %} 
+<div class="login-container">
+    <h2>Login</h2>
+    <div class="input-group">
+        <input name="gmail" type="email" placeholder="Email" required>
+    </div>
+    <div class="input-group">
+        <input type="password" id="password" placeholder="Password" name= "passw" required>
+        <span class="toggle-password" onclick="togglePassword()">👁️</span>
+        <span class="bird" id="bird">🐦</span>
+    </div>
+    <a href="{% url 'register' %}" > new user?</a>
+    <button type ="submit" class="login-btn">Login</button>
+</div>
+</form>
+<script>
+    const bird = document.getElementById("bird");
+
+    function togglePassword() {
+        const bird = document.getElementById("bird");
+        const passwordField = document.getElementById("password");
+    
+        function togglePassword() {
+            if (passwordField.type === "password") {
+                passwordField.type = "text";
+                bird.classList.add("look-left");
+            } else {
+                passwordField.type = "password";
+                bird.classList.remove("look-left");
+            }
+        }
+</script>
+{% endblock %}

@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+
+{% block style %}
+.navbar {
+    background-color: #1c1c1c;
+}
+
+/* Centering the interests form without affecting navbar */
+.interest-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 90vh; /* Adjusted to leave space for navbar */
+    background-color: #343a40; /* Dark background */
+}
+
+.interest-container {
+    background: #495057;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    width: 300px;
+    position: relative;
+    color: #ffffff; /* White text for dark theme */
+}
+
+.interest-container h2 {
+    margin-bottom: 20px;
+    color: #ffffff;
+}
+
+.input-group {
+    margin-bottom: 20px;
+    text-align: left; /* Align checkbox labels to the left */
+}
+
+/* Style for the checkboxes */
+.checkbox-label {
+    display: block;
+    margin: 10px 0;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 10px;
+    background-color: #28a745;
+    border: none;
+    color: #fff;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.submit-btn:hover {
+    background-color: #218838;
+}
+{% endblock %}
+
+{% block body %}
+<div class="interest-wrapper">
+    <form method="POST" action="{% url 'intrests' %}">
+        {% csrf_token %}
+        <div class="interest-container">
+            <h2>Select Your Interests</h2>
+            <div class="input-group">
+                <label class="checkbox-label">
+                    <input type="checkbox" name="interests" value="Sports"> Sports
+                </label>
+                <label class="checkbox-label">
+                    <input type="checkbox" name="interests" value="Anime"> Anime
+                </label>
+                <label class="checkbox-label">
+                    <input type="checkbox" name="interests" value="Gaming"> Gaming
+                </label>
+                <label class="checkbox-label">
+                    <input type="checkbox" name="interests" value="Programming"> Programming
+                </label>
+                <label class="checkbox-label">
+                    <input type="checkbox" name="interests" value="Entrepreneurship"> Entrepreneurship
+                </label>
+                <label class="checkbox-label">
+                    <input type="checkbox" name="interests" value="Hacking"> Hacking
+                </label>
+                <label class="checkbox-label">
+                    <input type="checkbox" name="interests" value="Crypto"> Crypto
+                </label>
+                <label class="checkbox-label">
+                    <input type="checkbox" name="interests" value="Stocks"> Stocks
+                </label>
+                <label class="checkbox-label">
+                    <input type="checkbox" name="interests" value="Traveling"> Traveling
+                </label>
+                <label class="checkbox-label">
+                    <input type="checkbox" name="interests" value="Cooking"> Cooking
+                </label>
+                <label class="checkbox-label">
+                    <input type="checkbox" name="interests" value="Art"> Art
+                </label>
+                <label class="checkbox-label">
+                    <input type="checkbox" name="interests" value="Music"> Music
+                </label>
+            </div>
+            <button type="submit" class="submit-btn">Submit Interests</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

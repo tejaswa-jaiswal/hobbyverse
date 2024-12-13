@@ -25,12 +25,13 @@ SECRET_KEY = 'django-insecure-z*@$e#hk_5n1@eyxk#4b)6+r^8)tu%igmhhsiz=c*#!o9l*4lc
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1']
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    
     'daphne',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -43,7 +44,15 @@ INSTALLED_APPS = [
     'django_htmx'
 ]
 
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels.layers.InMemoryChannelLayer',
+    },
+}
+
+
 MIDDLEWARE = [
+    
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -105,7 +114,10 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
+CORS_ALLOWED_ORIGINS = [
+    'http://127.0.0.1:7000',
+    'http://localhost:7000',
+]
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
 
@@ -123,7 +135,9 @@ AUTH_USER_MODEL = 'home.User'
 import os
 
 STATIC_URL = 'static/'
-STATICFILES_DIRS=  ["static/"]
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),  # Ensure "static" folder exists at the specified path
+]
 MEDIA_URL= 'media/'
 MEDIA_ROOT= os.path.join(BASE_DIR, 'media')
 

@@ -9,11 +9,11 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'hobify.settings')
 
 django_asgi_app = get_asgi_application()
 
-from chat import routing
+import chat.routing
 
 application = ProtocolTypeRouter({
     "http": django_asgi_app,
-    "websocket": AllowedHostsOriginValidator(
-        AuthMiddlewareStack(URLRouter(routing.websocket_urlpatterns))
-    ),
+    "websocket": 
+        AuthMiddlewareStack(URLRouter(chat.routing.websocket_urlpatterns))
+    ,
 })

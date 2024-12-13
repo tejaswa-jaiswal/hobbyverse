@@ -4,16 +4,14 @@ from django.contrib.auth.models import AbstractUser
 
 
 class User(AbstractUser):
-    email = models.EmailField(unique=True)  # Ensure email is unique
+    email = models.EmailField(unique=True)  
     userid = models.AutoField(primary_key=True)
     name = models.CharField(max_length=255)
     interests = models.TextField(blank=True, null=True)
     is_verified = models.BooleanField(default=False)
     profile_img = models.ImageField(upload_to='static/profile/', blank=True, null=True)
-
     REQUIRED_FIELDS = ['username']  # Add 'username' as a required field for superuser creation
     USERNAME_FIELD = 'email'        # Set 'email' as the unique identifier for authentication
-
     def __str__(self):
         return self.username
 
@@ -24,6 +22,7 @@ class Community(models.Model):
     community_image=   models.ImageField(upload_to='static/community/', blank=True, null=True)
     def __str__(self) :
         return self.category
+
 class Channel(models.Model):
     channel_ID = models.AutoField(primary_key=True)
     community = models.ForeignKey(Community, on_delete=models.CASCADE, related_name="channels")  # Link to Community
